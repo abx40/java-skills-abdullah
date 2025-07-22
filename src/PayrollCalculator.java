@@ -120,6 +120,7 @@ public class PayrollCalculator {
         double[] hours = {45, 20, 35, 15, 50};
         double[] rates = {25.0, 18.0, 40.0, 12.0, 30.0};
         String[] names = {"Alice", "Bob", "Charlie", "Diana", "Eve"};
+        boolean[] hasHealthInsurance = {true, false, true, false, true};
 
 
     // Test individual calculations first
@@ -131,6 +132,9 @@ public class PayrollCalculator {
                 double weeklyPay = calculateWeeklyPay(types[i], hours[i], rates[i]);
                 System.out.printf("Weekly pay for %s (%s, %.2f hours, $%.2f rate): $%.2f%n",
                         names[i], types[i], hours[i], rates[i], weeklyPay);
+                double taxDeduction = calculateTaxDeduction(weeklyPay, hasHealthInsurance[i]);
+                System.out.printf("Tax deduction for %s: $%.2f%n", names[i], taxDeduction);
+
 
             } catch (IllegalArgumentException e) {
                 System.out.println("Error for " + names[i] + ": " + e.getMessage());
